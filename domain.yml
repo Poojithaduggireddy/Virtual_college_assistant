@@ -1,0 +1,629 @@
+version: '3.1'
+intents:
+- Thankyou
+- affirm
+- bot_challenge
+- deny
+- get_attendance
+- get_general_info
+- get_results
+- goodbye
+- greet
+- login
+- mood_great
+- mood_unhappy
+- select_option
+- inquire_about_chairman
+- inquire_about_principal
+- inquire_about_courses
+- virtual_tour
+- ok
+- inquire_about_be_admission
+- inquire_about_me_admission
+- inquire_about_mba_admission
+- inquire_about_general_admission
+- inquire_be_ranks
+- inquire_fee_details
+- inquire_intake_capacity
+- inquire_facilities
+- inquire_hostel
+- inquire_transport_general
+- inquire_transport_routes
+- inquire_sports_facilities
+- inquire_e_resources
+- inquire_it_department
+- inquire_it_hod
+- inquire_it_faculty
+- list_it_faculty
+- inquire_placements
+- inquire_iiic
+- inquire_industry_training
+- faculty_ask_id
+- faculty_ask_password
+- latest_news
+- latest_events
+- college_query
+- college_autonomous_query
+- ask_timings
+- ask_professor_info
+- ask_college_address
+- ask_tuition_fees
+- ask_social_media
+- contact_info
+- ask_academic_calendar
+- ask_college_achievements
+- ask_about_rd
+- ask_companies
+- ask_ncc_info
+- nss_info
+- student_branches
+- fee_reimbursement
+- syllabus_third_year_it
+- syllabus_second_year_it
+- ask_timetable
+- list_cse_faculty
+- list_ece_faculty
+- list_eee_faculty
+- list_mba_faculty
+- list_civil_faculty
+- list_mechanical_faculty
+- list_automobile_faculty
+- ask_holiday:
+    use_entities: false
+- bot_answer
+- exchairman_secretary
+- dresscode
+- exprincipal
+- canteen_tour
+- It_tour
+- CSE_tour
+- central_tour
+- ask_hod_details
+- results_online
+- about_it_placements_coordinator
+- ask_college_placements_coordinator
+- ask_dean_of_exams
+- ask_exam_branch_incharge
+- ask_students_placed_automobile
+- ask_students_placed_civil
+- ask_students_placed_mech
+- ask_students_placed_eee
+- ask_students_placed_ece
+- ask_students_placed_cse
+- ask_students_placed_it
+
+
+entities:
+- password
+- user_type
+- username
+- person
+- faculty_name
+- faculty_id
+- faculty_password
+- date
+- company
+- department
+
+slots:
+  username:
+    type: text
+    mappings:
+    - type: from_entity
+      entity: username
+      intent: login
+  password:
+    type: text
+    mappings:
+    - type: from_entity
+      entity: password
+      intent: login
+  user_type:
+    type: categorical
+    values:
+    - student
+    - faculty
+    - visitor
+    mappings:
+    - type: from_entity
+      entity: user_type
+      intent: select_option
+  person:
+    type: text
+    mappings:
+      - type: from_entity
+        entity: person
+  faculty_name:
+    type: text
+    influence_conversation: false
+    mappings:
+      - type: from_entity
+        entity: faculty_name
+  faculty_id:
+    type: text
+    influence_conversation: false
+    mappings:
+      - type: from_entity
+        entity: faculty_id
+  faculty_password:
+    type: text
+    influence_conversation: false
+    mappings:
+      - type: from_entity
+        entity: faculty_password
+  date:
+    type: text
+    mappings:
+      - type: from_entity
+        entity: date
+      - type: from_text
+        intent: ask_holiday
+        value: "today"
+      - type: from_text
+        intent: ask_holiday
+        value: "tomorrow"
+  company:
+    type: text
+    influence_conversation: false
+    mappings:
+      - type: from_entity
+        entity: company
+  department:
+    type: text
+    influence_conversation: false
+    mappings:
+      - type: from_entity
+        entity: department
+
+
+responses:
+  utter_ok:
+  - text: great,carry on!
+  utter_Thankyou:
+  - text: Welcome
+  utter_greet:
+  - text: Hey! How are you?
+  utter_cheer_up:
+  - text: 'Here is something to cheer you up:'
+    image: https://i.imgur.com/nGF1K8f.jpg
+  utter_did_that_help:
+  - text: Did that help you?
+  utter_happy:
+  - text: Great, carry on!
+  utter_goodbye:
+  - text: Bye
+  utter_iamabot:
+  - text: I am a bot, powered by MVSR.
+  utter_ask_login:
+  - text: Please provide your login credentials.
+  utter_chairman_info:
+  - text: PVR Kashyap, Chairman of Matrusri Education Society, is an Electronics and Communications Engineer from Bangalore University and a second-generation entrepreneur with interests in various sectors, including agriculture and automobile distribution. He mentors startups and is involved in philanthropy through the PV Narasimha Rao Foundation and Isha Foundation. Kashyap comes from a political family, with his grandfather, Late Shri. PV Narasimha Rao, having served as the Prime Minister of India.
+  utter_principal_info:
+  - text: <img src="https://mvsrec.edu.in/images/Principal_2024_DrVijayaGunturu.jpg"> Professor Dr G. Vijaya, Ph.D., is the Principal of our institution with over 35 years of experience in Electronics & Communication Engineering. He obtained his Ph.D. from IIT Roorkee in 1998 and has held significant academic and administrative positions, including Professor and Director of Extension Services at SR University, Warangal. His research interests include Biomedical Instrumentation & Informatics, with numerous publications and projects in the field. He has been recognized for his contributions with awards such as the Employee of the Month at the University of Dubai and has actively contributed to IEEE conferences.
+  utter_courses_info:
+  - text: Currently, the college offers B.E programs in Civil, CSE (AI/ML, DS, IoT-CS-BcT), ECE, EEE, IT, and Mechanical Engineering. PG programs are available in Civil, CSE, ECE, and Mechanical, besides MBA.
+  utter_virtual_tour:
+  - text: To look after college virtual tour click the given link, <a href="https://mvsrec.edu.in/index.php?option=com_content&view=article&id=656&Itemid=1234" target="_blank">Virtual Tour</a>
+  utter_be_admission_info:
+  - text: >
+      -Admissions for B.E/Btech under Convenor's Quota (70% of intake) require passing the Intermediate examination with Mathematics, Physics, and Chemistry, and qualifying in the EAMCET exam. <br>
+      -The candidates are admitted based on EAMCET rank and marks in the Intermediate examination. <br>
+      -For Category B (30% of intake), seats are filled by the college as per Telangana Govt. guidelines. <br>
+      -For more information, contact Mr. I. Krishna, In-charge- Academics, at Ph.No: 9703001616.<br>
+      -Lateral entry: There is a provision to admit 10% of intake in each branch directly into BE II year.Candidates with a diploma qualification are admitted through Convenor ECET after qualifying in ECET entrance examination.
+  utter_exprincipal:
+  - text: Dr.G.Kanaka Durga has been working in this college since  1991. Her area of specialization is Low Power VLSI Design. She took charge as principal on 29-Nov-2017. She is a professor in ECE Department.
+  utter_me_admission_info:
+  - text: For M.E/M.Tech, 13 seats are filled by the Convenor, PG admissions (based on GATE/PGECET scores) and 5 under the sponsored category. Applicants for the sponsored category need 55% in the qualifying degree and apply directly to the college.
+  utter_mba_admission_info:
+  - text: MBA admissions require a bachelor's degree with 45% marks and qualifying in the ICET exam. The Convener admits 70% of the intake based on ICET rank, and the Management admits the remaining 30% under Management and NRI quota as per Telangana government rules.
+  utter_general_admission_info:
+  - text: Our college offers B.E and M.Tech and MBA courses. For detailed information about admission requirements for a specific course and incharge for admissions is Mr. J. Prasanna Kumar,Professor CSE, please ask about that particular program.
+  utter_be_ranks_info:
+  - text: >
+      you can find the starting and ending ranks for B.E/btech admissions for 2022-2023 <img src="https://mvsrec.edu.in/images/Admissions/22-23-start-end-ranks.jpg" >
+  utter_fee_details:
+  - text: >
+      You can find the fee details for various courses <a href="https://drive.google.com/file/d/1W7DN7oZSE6-_oFwYWiZKylQYC2Yv3HCc/view" target="_blank">fee details</a>.
+  utter_intake_capacity:
+  - text: >
+      The intake capacity for B.E/B.Tech branches is as follows:<br>
+      - Civil Engineering: 60<br>
+      - Computer Science & Engineering: 240<br>
+      - CSE (AI & ML): 60<br>
+      - CSE (Data Science): 60<br>
+      - CSE (IoT-CS-BcT): 60<br>
+      - CSIT: 60<br>
+      - Electrical and Electronics Engineering: 60<br>
+      - Electronics and Communication Engineering: 180<br>
+      - Information Technology: 180<br>
+      - Mechanical Engineering: 60<br>
+  utter_facilities_list:
+  - text: >
+        Our college offers the following facilities:<br>
+        - Library<br>
+        - Facilities for Physically Challenged Students<br>
+        - Games & sports<br>
+        - Dispensary<br>
+        - Ambulance<br>
+        - Transport<br>
+        - Canteen<br>
+        - Bank<br>
+        - Hostel<br>
+        - Computing Center<br>
+        - Yoga<br>
+        - Recording facility<br>
+  utter_hostel_info:
+  - text: >
+        Our college offers the following hostel facilities:<br>
+        - MVSREC Boys Hostel is Available.<br>
+        - MVSREC Girls Hostel (MVVR girls hostel) is available at a distance of 200 m from the college.<br>
+        Name and Contact Details of Hostel Incharge:<br>
+        Mr. K. Ramanand - Ph. 9989051855 & 9000005463<br>
+  utter_transport_general:
+  - text: >
+        Transport facility is provided to staff and students from various locations of Hyderabad.
+        For detailed bus routes, please ask for bus route details.
+
+  utter_transport_routes:
+  - text: >
+        Here are the details of the bus routes:<br>
+        1. Route 1: Starting time: 7.45 AM, Departure time: 4.30 PM, Route: ECIL to MVSR College<br>
+        2. Route 2: Starting time: 7.20 AM, Departure time: 4.30 PM, Route: BEERAMGUDA to MVSR College<br>
+        3. Route 2A: Starting time: 7.30 AM, Departure time: 4.30 PM, Route: JEEDIMETLA to MVSR College<br>
+        Contact Numbers for Transport Queries:<br>
+        - 8074813607<br>
+        - 9885921784<br>
+        - 9059488515<br>
+        - 9703618736<br>
+  utter_sports_facilities:
+  - text: >
+        Sports and games play an important role in the overall development of students. 
+        The college provides various facilities for outdoor and indoor games. 
+        Outdoor games include: Cricket Ground and Nets, 200 Mts Athletic Track, Football, Basketball Court, 2 Volleyball Courts, 2 Throw Ball Courts, and a Tennis Court under construction. 
+        Indoor games include: Table Tennis, Carrom Boards, Chess, and Shuttle Badminton. 
+        Students are encouraged to play during free periods and after college hours (4.00 PM to 6.00 PM) under the guidance of the Physical Director. Talented students are encouraged to participate in Annual Inter College Tournaments.
+  utter_e_resources:
+  - text: >
+        The college provides various e-resources to support effective multimedia learning. 
+        Students have access to resources such as NPTEL, SWAYAM, NDL, Journals, and Magazines.
+  utter_it_department:
+  - text: >
+        The Department of Information Technology, established in 2000, offers a UG program with an intake of 180 students annually. The department offers UG programme in Information Technology which is a fusion of Computer Science, Electronics & Communications. Accredited by NBA in 2007, the department boasts well-qualified faculty, modern labs, and strong industry ties for internships. It hosts workshops, conferences, and has active student associations like IEEE and ITSA, promoting both academic and extracurricular excellence.
+  utter_it_hod:
+  - text: >
+        <img src="https://mvsrec.edu.in/images/IT/images/HoD_DrKVG.jpg"> Dr. K. Venu Gopal Rao, Dean Academics & HOD of the IT Department at MVSREC, Hyderabad, has 32 years of experience, including 24 years in teaching and 8 years in industry. He holds a Ph.D. in Computer Science & Engineering and has published over 165 technical papers. He has received multiple awards, including the Academic Excellence Award and Best Engineering College Teacher Award. Dr. Rao is currently guiding 18 Ph.D. scholars and has held various positions at JNTUH and GNITS, contributing significantly to academia and research.
+  utter_list_it_faculty:
+  - text: |
+        there are 32 faculty members in the IT Department:<br>
+        1. Dr. K. Venu Gopal Rao (Dean Academics & HOD)<br>
+        2. Dr. Chepuri Samson (Professor)<br>
+        3. Dr. Jayasree Hanumantha Rao (Professor)<br>
+        4. D. B. V. Ravi Shankar (Associate Professor)<br>
+        5. Dr. A V Krishna Prasad (Associate Professor)<br>
+        6. Dr Dumpala Shanthi (Associate Professor)<br>
+        7. Dr Vasavi Bande	(Associate Professor)<br>
+        8. Dr Ugendhar Addagatla (Associate Professor)<br>
+        9.  Jindam Sowjanya (Assistant Professor)<br>
+        10. Gumpally Usha Sri (Assistant Professor)<br>
+        11. Kuthadi Devaki (Assistant Professor)<br>
+        12. Seelam Ch Vijaya Bhaskar (Assistant Professor)<br>
+        13. Kakara Sri Lakshmi (Assistant Professor)<br>
+        14. Pisupati Karthik (Assistant Professor)<br>
+        15. Kintali Chandra Sekhar	(Assistant Professor)<br>
+        16. Durgam Muninder	(Assistant Professor)<br>
+        17. Chikkela Srujana (Assistant Professor)<br>
+        18. Nithya Lakshmi(Assistant Professor)<br>
+        19. Ramya Madhavi(Assistant Professor)<br>
+        20. Annapureddy Manasa (Assistant Professor)<br>
+        21. Parlakula Amba Bhavani (Assistant Professor)<br>
+        22. B. Kalpana (Assistant Professor)<br>
+        23. P. Sita Sowjanya (Assistant Professor)<br>
+        24. V. Swarna Kamalam (Assistant Professor)<br>
+        25. T. Shashi Kumar	(Assistant Professor)<br>
+        26. Medishetty Swapna (Assistant Professor)<br>
+        27. Maya B. Dhone (Assistant Professor)<br>
+        28. M. Prathyusha (Assistant Professor)<br>
+        29. Sri Laxmi K	(Assistant Professor)<br>
+        30. M. Sravani	(Assistant Professor)<br>
+        31. Thuvva Anjali (Assistant Professor)<br>
+        32. B. Mahender Reddy (Assistant Professor)<br>
+  utter_placements_info:
+  - text: >
+        The college Placement and Career Guidance Cell was established in the year 1997 with Mr. J. Prasanna Kumar,Professor CSE, officiating as Placement Officer. The Cell was helpful in the placement of hundreds of students in many prestigious companies in the country.  Faculty members from each department are co-opted as members of the Placement Cell.For information about the previous placements, you can check the detailed report for 2022-2023 <a href="https://mvsrec.edu.in/images/Placements/22-23-Placements.pdf" target="_blank">placements</a>.
+  utter_iiic_info:
+  - text: >
+        The Industry Institute Interaction Cell (IIIC) at our college aims to bridge the gap between academia and industry. The IIIC is responsible for the following:<br>
+        - Organizing workshops and conferences with industry personnel.<br>
+        - Facilitating industrial training and visits for faculty and students.<br>
+        - Involving industry personnel in research activities of the faculty.<br>
+        - Identifying consultancy projects from industry.<br>
+        - Arranging guest lectures and seminars by industry experts.<br>
+        - Involving industry experts in the development and review of the curriculum.<br>
+        - Identifying internship and project opportunities for students in the industry.<br>
+        - Addressing technical problems faced by the industry.<br>
+        Mr.S.Ch.Vijaya Bhaskar, Asst.Prof, IT Coordinator for IIIC cell, Dept. of IT<br>
+  utter_industry_training:
+  - text: |
+      Industry desires certified graduates for highly paid job profiles. To address this gap, graduates must always possess relevant knowledge and practical experience of tools & technologies used at the industry.
+      The undergraduate curriculum integrates industry training/certification programs into academics for strengthening the key ability required to improve the graduate's knowledge, skill and capacity to work through these programs.
+      Following are the Industry Training Academies established at MVSREC(A):-<br>
+      1.Cisco<br>
+      2.Wipro<br>
+      3.Salesforce<br>
+      4.Service now<br>
+      5.Oracle<br>
+      7.AWS<br>
+      8.Blue Prism<br>
+      9.Micro chip<br>
+      To know courses offered by them and department coordinators visit the given link,<a href="https://mvsrec.edu.in/index.php?option=com_content&view=article&id=1778&Itemid=1759" target="_blank">here</a>
+  utter_latest_news:
+  - text: >
+        Here are the latest news updates from MVSREC:<br>
+        1. Skill Development Scholarship for top 10 rankers of MVSR Engineering College.<br>
+        2. MVSREC stands 5th in the State as per July 2021 Times Engineering Rankings 2021.<br>
+        3. Sewing Machine Project Executed by the members of Street Cause MVSREC - Telecasted on I News TV Channel.<br>
+        4. Operating Manuals for Students & Institutions - AICTE Pragati and Saksham Schemes.<br>
+        5. MHRD - SWAYAM & ICT Initiatives for FREE ONLINE digital course content available for Students / Faculty.<br>
+  utter_latest_events:
+  - text: |
+        Here are the latest events at MVSREC:<br>
+        - *DAPCOM-2024*: International Conference on Data Acquisition, Processing and Communication, from 29th Feb to 02nd March 2024.<br>
+        - *RASEFT-2024*: A Conference on Recent Advances In Sustainable Engineering and Future Technologies, from 27th to 29th December 2024.<br>
+  utter_college_details:
+  - text: Maturi Venkata SUbbarao(MVSR) Engineering College, located in Nadergul, Hyderabad, is affiliated to Osmania University. Established in 1980, it is an autonomous institution with a NIRF rank in 2020,AICTE approved,NBA Accredited courses civil,CSE,EEE,IT and Mechanical,NAAC Accredited.
+  utter_college_autonomous:
+  - text:  MVSR Engineering College is an autonomous institution.but it is under osmania university
+  utter_ask_timings:
+  - text: The college timings are from 9:30 AM to 4:15 PM. short break is from 11:30 to 11:40.lunch timings are 1:40 pm to 2:15 pm
+  utter_ask_professor_info:
+  - text:  Prof. S.G.S. Murthy joined this college on 3/2/1986 as an Asst. Professor after a stint in M/s L&T. 
+        He graduated in Civil Engineering from College of Engineering of O.U. in 1983. 
+        His areas of interest are Structural analysis and high performance concrete.
+        He is the construction coordinator of the college who planned and executed the present campus in Nadergul. 
+        He has secured several consultancy assignments from GHMC and Singareni Collieries to the college. 
+        Apart from being the best teacher awardee, he is also on the reviewer panel of M/s Tata Mcgraw Hill, a prestigious publishing company. 
+        Prof. Murthy is an accredited structural and Proof consultant to GHMC, Govt. of A.P. for their Civil Engineering works. 
+        He headed the Department of Civil Engineering during 2006 - 2010.Prof. SGS MURTHY
+        <img src='https://mvsrec.edu.in/images/Voice_Princial.jpg'>
+  utter_ask_college_address:
+  - text: |
+         MVSR College is located at: 7GJQ+P44, Saroornagar Mandal, Badangpet - Nadargul Main Rd, Hyderabad, Telangana 501510.
+         For further enquiries, visit: <a href="https://maps.app.goo.gl/3qznmRjpCa4ipFWZA" target="_blank">Google maps</a>
+  utter_ask_tuition_fees:
+  - text: Tuition fees are only available in online mode. can pay through this link <a href="https://mvsrec.edu.in/index.php?option=com_content&view=article&id=1112&Itemid=1403" target="_blank">pay fee</a>
+  utter_ask_social_media:
+  - text: |
+          Currently we are active only on Instagram and YouTube.
+           You can find us on:<br>
+           - Instagram: MVSR Blogs: <a href="https://www.instagram.com/mvsrblogs/" target="_blank" >MVSR blogs</a><br>
+           - Instagram: MVSR Talks: <a href="https://www.instagram.com/mvsr_.talks/" target="_blank" >MVSR talks</a><br>
+           - YouTube: <a href="https://www.youtube.com/@maturivenkatasubbaraomvsre7020" target="_blank" >Youtube</a><br>
+  utter_ask_ncc_info:
+    - text: "NCC is available at MVSREC. For further inquiries, you can contact Flying Officer SESIDHAR D.V.S.R. at sesidhar_ece@mvsrec.edu.in."
+  utter_nss_info:
+    - text: "NSS is available at MVSREC. You can join NSS by contacting M. SARATH CHANDRA, NSS PO, phno:9987654234."
+  utter_student_branches:
+    - text: "The list of professional bodies at MVSREC includes: CSI, IEEE, ACM, AIMERS society, and Street Cause."
+  utter_syllabus_third_year_it:
+    - text: You can find the syllabus for the third year IT branch <a href="https://drive.google.com/file/d/1aAvOEL_gW4qa54QIOOLkzvD-4rjcSg7b/view" target="_blank">Here</a>
+  utter_syllabus_second_year_it:
+    - text: You can find the syllabus for the second year IT branch <a href= "https://drive.google.com/file/d/1s8VlSziftL1XYfVbI8UZ1kmrz-NkFd3j/view" target="_blank">Here</a>
+  utter_ask_about_rd:
+    - text: |
+       Our college has established a Research and Development Cell (RDC) to manage projects funded by various agencies and provide technical consultancy. Faculty are encouraged to seek external funding and complete their PhDs, with support such as weekly leave and incentives for publishing in high-impact journals. Recognized as a research center by the affiliated university, the college motivates faculty to guide PhD scholars and fosters innovation through annual research symposiums and project expos. State-of-the-art facilities support R&D across all departments, with ethical standards upheld through plagiarism checks for all submitted research papers.
+       - Project EXPO-2023 Souvenir<br>
+        - Project EXPO-2019 Souvenir<br>
+        - Project EXPO-2018 Souvenir<br>
+        - Central R&D and Consultancy Committee<br>
+        - R&D and Consultancy Cell<br>
+        - Consultancy undertaken by the college<br>
+        - Research Centres and Ph.D guidance<br>
+        - Faculty with Ph.D and pursuing<br>
+        - Sponsored Projects<br>
+        - Publications by faculty<br>
+        - Patents<br>
+        - Faculty training to industry<br>
+        - Students Projects<br>
+        - Consultancy Procedure<br>
+        - Center(s) of Excellence<br>
+        - Code of Ethics for Research<br>
+  utter_bot_answer:
+    - text: I am a Virtual College Assistant, here to answer all your college-related queries and help you find your personal information.
+
+  utter_exchairman_secretary:
+    - text: Dr. K. P. Srinivas Rao, MBBS, MS (Ophthalmology) was a Gold medalist in M.S. from Chennai. He did his Fellowship at Moorfield Eye Hospital at London. He presented various papers in Ophthalmology in national and international conferences and in International Laser Conference.Presently he is the Vice Chairman of Sridevi Educational Society. He has his own clinic Century Eye Care Centre at Vijayanagar Colony, Hyderabad. He has conducted several free eye care campus at Hyderabad, Chennai & Ananthpur.
+  utter_academic_calender:
+    - text: Here is alamnac for the sem,<img src="http://127.0.0.1:5000/academic-calendar">
+  utter_dresscode:
+    - text: Dress code for girls and boys,girls-kurthis
+            boys-trousers and shirts
+  utter_canteen_tour:
+    - text: To view canteen in the college click below link for virtual tour.<a href="https://mvsrec.edu.in/images/canteen.html" target="_blank">canteen tour</a>
+  utter_It_tour:
+    - text: To view IT department click below link for virtual tour.<a href="https://mvsrec.edu.in/images/IT.html" target="_blank">IT department tour</a>
+  utter_CSE_tour:
+    - text: To view CSE department click below link for virtual tour.<a href="https://mvsrec.edu.in/images/cse.html" target="_blank">CSE department tour</a>
+  utter_central_tour:
+    - text: To view Central Library click below link for virtual tour.<a href="https://mvsrec.edu.in/images/central.html" target="_blank">Library tour</a>
+  utter_list_cse_faculty:
+  - text: |
+        here are faculty members of cse department
+        1.Jettipalle Prasanna Kumar( Professor & HoD [TPO])<br>
+        2.Dr Akhil Khare(Professor)<br>
+        3.Dr Sesham Anand(Professor)<br>
+        4.Dr Banda Sandhya(professor)<br>
+        5.Dr Sanjeev K Yadav(Adjunct Professor)<br>
+        6.Meduri Anupama(Associate Professor)<br>
+        7.Godavarthy Vijay Kumar(Associate Professor & CISCO NetAcad Contact)<br>
+        8.Dr Daggubati Sirisha(Associate Professor)<br>
+        9.Boddupally Janaiah(Assistant Professor)<br>
+        10.	Nagamala Sabitha(Assistant Professor)<br>
+        11.	Dr. M. V. R. Jyothisree(Assistant Professor)<br>
+        12.Thimmareddy Lakshmi(Assistant Professor)<br>
+        13.	Methuku Madhuri(Assistant Professor)<br>
+        14. Gummedelli Srishailam(Assistant Professor & Wipro Certified Faculty)<br>
+        15.	Kanala Kavitha Lakshmi(Assistant Professor)<br>
+        16. Inala Navakanth(Assistant Professor)<br>
+  utter_list_ece_faculty:
+  - text: >
+        here are faculty members of cse department<br>
+        1.Dr Ganapavarapu Kanaka Durga(Professor)<br>
+        2.Dr Beeram Sarala(Professor)<br>
+        3. Dr. S P Venu Madhava Rao(Professor)<br>
+        4.Dr Kamle Usha(Professor)<br>
+        5.Dr S Suryanarayana(Professor & HOD)<br>
+        6.Nuli Namassivaya(Associate Professor)<br>
+        7.Dr. Tatikonda Kavitha(Associate Professor)<br>
+        8.Dr. Sharath Kumar D R V A(Associate Professor)<br>
+        9.Eranki V Nagalakshmi(Assistant Professor)<br>
+        10.	Gugulothu Sravan Kumar(	Assistant Professor)<br>
+        11.Boddu Bhavani(Assistant Professor)<br>
+  utter_list_civil_faculty:
+  - text: |
+      here are faculty members of civil faculty<br>
+      1.Prof. Soudarthi G S Murthy(	Vice Principal & Professor)<br>
+      2.Dr C S V Subrahmanya Kumar(Professor)<br>
+      3.Dr Marthi Kameswara Rao(Professor & HOD)<br>
+      4.Dr Gumpalli Sreenivasa Rao(Associate Professor)<br>
+      5.Dr Regalla Sandhya Rani(Associate Professor)<br>
+      6.Dr. Ramancharla Prashant Kumar(Associate Professor)<br>
+      7.Dr. Ganti Padmaja(Assistant Professor)<br>
+      8.Mr. Alladi Sanjay Kumar(Assistant Professor)<br>
+      9.Mrs. Viswanadha Palli Vijaya Lakshmi(Assistant Professor)<br>
+      10.Mrs. Karne Swetha(Assistant Professor)<br>
+      11.Dr. Vaddiraju Shiva Chandra(Assistant Professor)<br>
+  utter_list_eee_faculty:
+  - text: >
+      1.Dr D Venumadhava Chary(Professor)<br>
+      2.Dr P V V Rama Rao(Professor)<br>
+      3.Dr. C V G Krishna Rao(Associate Professor & HOD)<br>
+      4.Dr D Hari Krishna(Associate Professor)<br>
+      5.Dr D Hari Krishna(Associate Professor)<br>
+      6.S Shyam Mohan(Assistant Professor)<br>
+      7.Gurram Satyanarayana(Assistant Professor)<br>
+      8.V Raghu Krishna(Assistant Professor)<br>
+      9.N Bharat Mohan(Assistant Professor)<br>
+      10.Y Laxmi Narasimha Rao(Assistant Professor)<br>
+  utter_list_mechanical_faculty:
+  - text: >
+      1.Dr Matlapudi Madhavi(Professor & HOD)<br>
+      2.Dr Saparey Gajanana	(Professor)<br>
+      3.Dr Jaya Kanda Samy(Professor)<br>
+      4.Dr. Gujjala Venkata Subbaiah(Professor)<br>
+      5.Kavipurapu V R K Subramanyam(Associate Professor)<br>
+      6.Sugur V Narasimha Rao(Associate Professor)<br>
+      7.Dr. B. Ravi Kumar(Assistant Professor)<br>
+      8.Miskin Ravi Kumar(Assistant Professor)<br>
+      9.Veerabathini Suman Raju(Assistant Professor)<br>
+      10.Dr. Gadidesh Prakasham(Assistant Professor)<br>
+      11.Yogi Manash Reddy(Assistant Professor)<br>
+      12.Kavuri Karthik Rajashekar(Assistant Professor)<br>
+  utter_list_mba_faculty:
+  - text: >
+      1.Dr Nandagiri Sravanthi(professor & HOD)<br>
+      2.Dr M Sree Rama Devi(Associate Professor)<br>
+      3.Koganti Sridivya(Assistant Professor)<br>
+      4.S Elizabeth Pravena	(Assistant Professor)<br>
+      5.Dr G Bharathi(Assistant Professor)<br>
+      6.Madireddy Jyothi Prasad(Assistant Professor)<br>
+      7.Kuchimanchi Pushyami(Assistant Professor)<br>
+      8.C. Prasanthi(Assistant Professor)<br>
+  utter_list_automobile_faculty:
+  - text: >
+      1.Dr Gangaraju Srinivasa Sarma(Associate Professor & HoD)<br>
+      2.Mongolla Pandarinath(Assistant Professor)<br>
+      3.A Gnan Reddy(Assistant Professor)<br>
+      4.Tokachichu Murali Mohan Raju(Assistant Professor)<br>
+      5.Malikasab Bagawan(Assistant Professor)<br>
+      6.Gundagani Saidulu(Assistant Professor)<br>
+      7.Manthena Vijay(Assistant Professor)<br>
+      8.Priyanka Miryalkar(Assistant Professor)<br>
+      9.Pranav Ravindran Nair(Assistant Professor)<br>
+  utter_results_online:
+  - text: Here is the link to check results on website.<a href="http://results.mvsrec.edu.in/SBLogin.aspx" target="_blank">results </a>
+  utter_about_it_placements_coordinator:
+  - text: Kintali Chandra Sekhar is an Assistant Professor at MVSR Engineering College with qualifications of M.Tech and pursuing a Ph.D. His areas of interest include Big Data, Machine Learning, and Web Designing. At the undergraduate level, he teaches subjects such as JAVA, Web Technologies, Object-Oriented System Development, Scripting Languages, Web Application Development, Web Services Architecture, Middleware Technologies, Mathematical Foundations in IT, Information Security, Operating Systems, and Data Communications
+          <img src='https://drive.google.com/thumbnail?id=1vlxbdRf3qQCwqgD7g5LBX2iU1_urATHx'>
+  utter_ask_college_placements_coordinator:
+    - text: Dr. Vemula Sridhar is an Assistant Professor and Training and Placement Officer (TPO) at MVSR Engineering College. He holds a Ph.D. and has expertise in Cloud Computing, Web Application Development, and Programming. At the undergraduate level, he teaches Programming in C, C++, Data Structures using C++, Object-Oriented Programming using Java, Operating Systems, Distributed Systems, Database Management Systems, Programming Languages, Web Programming, Web Programming and Services, and Cloud Computing. At the postgraduate level, he focuses on Cloud Computing
+            <img src='https://drive.google.com/thumbnail?id=1GY3dtPTXx6r032ZJQLDg8qFGkebLyIT3'>
+  utter_ask_dean_of_exams:
+    - text: Dr. S.Gajanana
+            <img src='https://mvsrec.edu.in/images/gajanana-new.jpg'>
+  utter_ask_exam_branch_incharge:
+    - text:   N.Shiva Rama Krishna  
+              <img src='https://mvsrec.edu.in/images/n.shiva-ramakrishna.jpg'>
+  utter_retrieve_fee_reimbursement:
+    - text: >
+            ‘Full Tuition fee reimbursement’ students:
+            Tuition fee is ‘0’ (Zero). The student shall apply/renew the Scholarship through TS E‐pass
+            every year, if not student has to pay full Tuition fee.
+            ‘Partial Tuition fee reimbursement’ students:
+            The student has to pay the difference Tuition fee i.e., total tuition fee minus TS Govt.
+            Scholarship amount. The student shall apply/renew the Scholarship through TS E‐pass every
+            year, if not student has to pay full Tuition fee.
+  utter_ask_students_placed_automobile:
+    - text: "The number of students placed in the Automobile branch is 31."
+  utter_ask_students_placed_ece:
+    - text: The number of students placed in the ECE branch is 197
+  utter_ask_students_placed_eee:
+    - text: "The number of students placed in the EEE branch  is 104"
+  utter_ask_students_placed_civil:
+    - text: "The number of students placed in the civil branch is 25"
+  utter_ask_students_placed_mech:
+    - text: "The number of students placed in the mechanical branch  is 27"
+  utter_ask_students_placed_it:
+    - text: "The number of students placed in the IT branch is 145"
+  utter_ask_students_placed_cse:
+    - text: "The number of students placed in the CSE is 198"
+session_config:
+  session_expiration_time: 60
+  carry_over_slots_to_new_session: true
+actions:
+- action_ask_login
+- action_select_option
+- action_validate_login
+- action_retrieve_results
+- action_retrieve_attendance
+- action_general_info
+- action_it_faculty_info
+- action_ask_faculty_id
+- action_ask_faculty_password
+- action_validate_faculty_login
+- action_check_holiday
+- action_provide_contact_info
+- action_show_academic_calendar
+- action_achievements
+- action_list_companies
+- action_show_timetable
+- action_provide_hod_details
+
+entity_synonyms:
+  faculty_name:
+    - Dr. K. Venu Gopal Rao
+    - K. Venu Gopal Rao
+    - Venu Gopal Rao
+    - Dr. Chepuri Samson
+    - Chepuri Samson
+    - Dr. Samson
+    - Dr. Jayasree Hanumantha Rao
+    - Jayasree Hanumantha Rao
+    - Jayasree Rao
+    - D. B. V. Ravi Shankar
+    - Ravi Shankar
+    - Dr. A V Krishna Prasad
+    - A V Krishna Prasad
+    - Krishna Prasad
+    - Jindam Sowjanya
+    - Sowjanya
+    - Kuthadi Devaki
+    - Devaki
+    - Seelam Ch Vijaya Bhaskar
+    - Vijaya Bhaskar
+    - Kakara Sri Lakshmi
+    - Sri Lakshmi
+    - Chikkela Srujana
+    - Srujana
+    - Nithya Lakshmi
+    - Ramya Madhavi

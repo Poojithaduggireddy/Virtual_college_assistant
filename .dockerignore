@@ -1,0 +1,4 @@
+tests/*
+actions/*
+**/*.md
+rasa
